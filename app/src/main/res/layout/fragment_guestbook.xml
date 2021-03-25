@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/draw_layout"
+    tools:context=".activity.contentActivity_note"
+    android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="this"
+            app:subtitle="@string/toolbar_subtitle"
+            android:background="#97435150"
+            android:id="@+id/toolbar"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textsss"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_below="@id/toolbar"
+            android:layout_gravity="center"
+            android:textStyle="bold|italic|normal"
+            android:text="@string/main_page_str"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/liuyance_recyclerview"
+
+
+            android:layout_below="@id/textsss"
+            android:layout_marginStart="2dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/refesh_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_12"
+            android:scaleType="centerInside"
+            app:backgroundTint="#37C3B5"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="20dp"
+            app:borderWidth="3dp"
+            app:maxImageSize="40dp"
+            app:elevation="5dp"/>
+
+
+    </RelativeLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+
+        android:id="@+id/nav_view"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        android:background="#B0376C67"
+        app:menu="@menu/nav_menu"/>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_user"
+            android:title="我的"
+
+            android:icon="@drawable/ic_launcher_background"/>
+        <item
+            android:id="@+id/content_note"
+            android:title="留言"/>
+
+        <item
+            android:id="@+id/we_position"
+            android:title="我们在那儿"/>
+    </group>
+</menu>

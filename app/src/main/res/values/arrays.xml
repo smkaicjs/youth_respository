@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="studentnumber">
+        <item>160610401001</item>
+        <item>160610401002</item>
+        <item>160610401003</item>
+        <item>160610401004</item>
+        <item>160610401005</item>
+        <item>160610401006</item>
+        <item>160610401007</item>
+        <item>160610401008</item>
+        <item>160610401009</item>
+        <item>160610401010</item>
+        <item>160610401011</item>
+        <item>160610401012</item>
+        <item>160610401013</item>
+        <item>160610401014</item>
+        <item>160610401015</item>
+        <item>160610401016</item>
+        <item>160610401017</item>
+        <item>160610401018</item>
+        <item>160610401019</item>
+        <item>160610401019</item>
+        <item>160610401020</item>
+        <item>160610401021</item>
+        <item>160610401022</item>
+        <item>160610401023</item>
+        <item>160610401024</item>
+        <item>160610401025</item>
+        <item>160610401026</item>
+        <item>160610401027</item>
+        <item>160610401028</item>
+        <item>160610401029</item>
+        <item>160610401030</item>
+        <item>160610401031</item>
+        <item>160610401032</item>
+        <item>160610401033</item>
+        <item>160610401034</item>
+        <item>160610401035</item>
+        <item>160610401036</item>
+        <item>160610401037</item>
+        <item>160610401038</item>
+        <item>160610401039</item>
+    </string-array>
+</resources>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00616E6F"
+    android:gravity="center_horizontal"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/coordinator_layout">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome My Classmate!"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:elevation="2dp"
+                android:outlineProvider="bounds"
+
+                android:textSize="20sp"
+                android:layout_marginTop="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                app:hintTextColor="#E18E5F19"
+                app:errorTextColor="#14268F"
+                app:boxBackgroundColor="#888BC34A"
+                android:id="@+id/textinput_name">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/username"
+                android:textSize="14sp"
+                android:elevation="4dp"
+                android:outlineProvider="bounds"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                android:inputType="number"
+                android:hint="学号"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+
+
+
+                app:hintTextColor="#97CDDC39"
+                app:errorTextColor="#BF28AF2E"
+                android:id="@+id/textinput_passworld">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/userpassword"
+                android:elevation="4dp"
+                android:inputType="textPassword"
+                android:outlineProvider="bounds"
+                android:hint="password"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:id="@+id/userlogin_button"
+                android:text="@string/str_userlogin"
+                android:outlineProvider="bounds"
+
+                android:elevation="4dp"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:shadowRadius="3"
+                android:background="#00296F68"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="注册"
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/user_register"
+                    android:textStyle="bold|italic"
+                    android:textSize="20sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:autoLink="all"
+                    android:textColor="#BC1C7169"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="8sp"
+                    android:textColor="#594F6239"
+                    android:text="@string/author"
+                    android:layout_marginBottom="15dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <com.shimk.Txgc.customUI.AnimCustonImage
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/login_loading"
+            android:src="@drawable/icon_loading"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</LinearLayout>

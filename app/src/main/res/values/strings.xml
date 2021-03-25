@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">青春纪念册</string>
+    <string name="network_service_create">网络服务创建</string>
+    <string name="network_service_destory">网络服务销毁</string>
+    <string name="str_userlogin">登 录</string>
+    <string name="loginerror">登录错误</string>
+    <string name="author">创作者\n服务端：绪\n应用端：坤</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_str_share">分享</string>
+    <string name="toolbar_subtitle">副标题</string>
+    <string name="main_page_str">每日寄语</string>
+
+</resources>
