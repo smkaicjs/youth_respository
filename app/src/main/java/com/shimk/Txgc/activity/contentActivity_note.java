@@ -1,48 +1,25 @@
 package com.shimk.Txgc.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.MenuItem;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
 import com.shimk.Txgc.R;
-import com.shimk.Txgc.adapter.Recyclerview_adapter_liuyance;
 import com.shimk.Txgc.adapter.ViewPagerAdapter;
 import com.shimk.Txgc.base.ActManager;
 import com.shimk.Txgc.base.BaseActivity;
-import com.shimk.Txgc.bean.ClassmateContent;
 import com.shimk.Txgc.frag.GuestbookFragment;
-import com.shimk.Txgc.network.NetworkLiuyanceContent;
-import com.shimk.Txgc.presenter.ContentNotePresenter;
+import com.shimk.Txgc.frag.RxjavaFragment;
+import com.shimk.Txgc.networkModel.NetworkLiuyanceContentImpl;
+import com.shimk.Txgc.presenter.ContentNotePresenterImpl;
 import com.shimk.Txgc.presenter.PresenterInterface;
-import com.shimk.Txgc.services.retr;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
-
-import com.shimk.Txgc.utils.Litepaldealwith;
 import com.shimk.Txgc.utils.ShimkLog;
 
 public class contentActivity_note extends BaseActivity {
@@ -80,11 +57,13 @@ public class contentActivity_note extends BaseActivity {
     private void viewinit(){
         //Guestbook fragment
         viewPagerAdapter = new ViewPagerAdapter(this);
-        NetworkLiuyanceContent netTask = NetworkLiuyanceContent.getInstance();
+        NetworkLiuyanceContentImpl netTask = NetworkLiuyanceContentImpl.getInstance();
         GuestbookFragment fragment = new GuestbookFragment();
-        ContentNotePresenter presenter = new ContentNotePresenter(netTask,fragment);
+        RxjavaFragment rxjavaFragment = new RxjavaFragment();
+        ContentNotePresenterImpl presenter = new ContentNotePresenterImpl(netTask,fragment);
         fragment.setPresenter(presenter);
         viewPagerAdapter.addFragment(0,fragment);
+        viewPagerAdapter.addFragment(1,rxjavaFragment);
         //other fragment
 
 

@@ -5,15 +5,8 @@ import org.litepal.crud.LitePalSupport;
 public class ClassmateContent extends LitePalSupport {
     private String name,posttime,content;
 
-    public int getBackCode() {
-        return backCode;
-    }
 
-    public void setBackCode(int backCode) {
-        this.backCode = backCode;
-    }
 
-    private int backCode;
 
     public ClassmateContent() {
     }

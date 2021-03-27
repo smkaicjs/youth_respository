@@ -10,9 +10,7 @@ public interface PresenterInterface {
     interface View extends BaseViewInterface<presenter>{
 
 
-        void requestSuccImage();
 
-        void requestFailed(String error);
 
         void responseFromNetPresenterSucc(ClassmateContent content);
         void responseFromNetPresenterFailed(String failedStr);

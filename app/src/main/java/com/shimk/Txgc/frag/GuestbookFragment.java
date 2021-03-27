@@ -212,15 +212,7 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void requestSuccImage() {
 
-    }
-
-    @Override
-    public void requestFailed(String error) {
-
-    }
 
     @Override
     public void responseFromNetPresenterSucc(ClassmateContent content) {
@@ -256,7 +248,7 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
 
     @Override
     public void responseFromNetPresenterFailed(String failedStr) {
-
+        ShimkLog.logd("请求错误");
     }
 
 

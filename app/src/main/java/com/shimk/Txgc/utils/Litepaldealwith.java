@@ -46,7 +46,6 @@ public class Litepaldealwith {
         content.setName(name);
         content.setPosttime(posttiem);
         content.setContent(contents);
-        content.setBackCode(200);
         Log.d(TAG, "addClassmatecontent: 保存调用");
         content.save();
         content.isSaved();

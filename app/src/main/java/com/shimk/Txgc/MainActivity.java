@@ -1,14 +1,10 @@
 package com.shimk.Txgc;
 
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +24,13 @@ import com.shimk.Txgc.base.BaseActivity;
 
 import com.shimk.Txgc.bean.BackCodeJavaBean;
 import com.shimk.Txgc.customUI.AnimCustonImage;
-import com.shimk.Txgc.network.ApiStore;
-import com.shimk.Txgc.services.NetWorkSrevices;
+import com.shimk.Txgc.networkModel.ApiStore;
 import com.shimk.Txgc.utils.Constant;
 import com.shimk.Txgc.utils.Shareprefener;
 import com.shimk.Txgc.utils.ShimkLog;
 
 import java.util.HashMap;
 
-import okhttp3.OkHttp;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,27 +52,13 @@ public class MainActivity extends BaseActivity {
     public static final String logintime = "LOGINTIME";
     public static final String logincerity = "LOGIN_verification";
 
-    private NetWorkSrevices.mybinder binder;
-    private ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            binder = (NetWorkSrevices.mybinder) service;
-            ShimkLog.logd("Service aleady connect");
-        }
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-        }
-    };
+
     public static final String TAG = "ShiMingKun";
     @Override
     protected void init() {
         setContentView(R.layout.activity_main);
         skipLogin();
         findview();
-        Intent intent = new Intent(MainActivity.this,NetWorkSrevices.class);
-        startService(intent);
-        bindService(intent,connection,BIND_AUTO_CREATE);
-        Log.d(TAG, "init: 服务步骤执行");
 
         //test
 
@@ -580,8 +559,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(connection);
-    }
+
+     }
 
     private void showToast(String str){
         Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
