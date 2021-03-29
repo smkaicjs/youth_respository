@@ -11,6 +11,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.baidu.mapapi.CoordType;
+import com.baidu.mapapi.SDKInitializer;
 import com.shimk.Txgc.services.MediaService;
 
 import org.litepal.LitePal;
@@ -37,7 +39,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         ActManager.addActivity(this);
         init();
+        //litepal初始化
         LitePal.initialize(this);
+        //baidumap 初始化
+        SDKInitializer.initialize(getApplicationContext());
+        SDKInitializer.setCoordType(CoordType.BD09LL);
         bindMediaService();
     }
 

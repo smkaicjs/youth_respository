@@ -7,7 +7,11 @@ import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import com.shimk.Txgc.R;
@@ -15,7 +19,7 @@ import com.shimk.Txgc.adapter.ViewPagerAdapter;
 import com.shimk.Txgc.base.ActManager;
 import com.shimk.Txgc.base.BaseActivity;
 import com.shimk.Txgc.frag.GuestbookFragment;
-import com.shimk.Txgc.frag.RxjavaFragment;
+import com.shimk.Txgc.frag.MapFragment;
 import com.shimk.Txgc.networkModel.NetworkLiuyanceContentImpl;
 import com.shimk.Txgc.presenter.ContentNotePresenterImpl;
 import com.shimk.Txgc.presenter.PresenterInterface;
@@ -27,13 +31,13 @@ public class contentActivity_note extends BaseActivity {
 
 
     public String sharefilename;
-    private ViewPager2 viewPager2;
+    public ViewPager2 viewPager2;
     private ViewPagerAdapter viewPagerAdapter;
 
 
 
     private PresenterInterface.presenter presenter;
-
+    private MapFragment mapFragment;
 
 
     @SuppressLint("RestrictedApi")
@@ -52,18 +56,21 @@ public class contentActivity_note extends BaseActivity {
     private void findview(){
         viewPager2 = findViewById(R.id.main_viewpager);
 
+
     }
+
+
 
     private void viewinit(){
         //Guestbook fragment
         viewPagerAdapter = new ViewPagerAdapter(this);
         NetworkLiuyanceContentImpl netTask = NetworkLiuyanceContentImpl.getInstance();
         GuestbookFragment fragment = new GuestbookFragment();
-        RxjavaFragment rxjavaFragment = new RxjavaFragment();
+        mapFragment = new MapFragment();
         ContentNotePresenterImpl presenter = new ContentNotePresenterImpl(netTask,fragment);
         fragment.setPresenter(presenter);
         viewPagerAdapter.addFragment(0,fragment);
-        viewPagerAdapter.addFragment(1,rxjavaFragment);
+        viewPagerAdapter.addFragment(1, mapFragment);
         //other fragment
 
 
@@ -75,7 +82,36 @@ public class contentActivity_note extends BaseActivity {
 
     }
 
+    private int getWidth(){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+        return displayMetrics.widthPixels;
+    }
+    private int getHeigth(){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+        return displayMetrics.heightPixels;
+    }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+
+        if (viewPager2.getCurrentItem()==1){
+
+            if (ev.getAction()==KeyEvent.ACTION_DOWN){
+
+                if ((int)ev.getX()>getWidth()*0.2&&(int)ev.getX()<getWidth()*0.8){
+                    viewPager2.setUserInputEnabled(false);
+                    Log.d(TAG, "kkkkk1");
+                }else {
+                    viewPager2.setUserInputEnabled(true);
+                    Log.d(TAG, "kkkkk2");
+                }
+            }
+
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
     private long mLastBackTime = 0;
     @Override
@@ -124,6 +160,7 @@ public class contentActivity_note extends BaseActivity {
 //        });
 //
 //    }
+
 
     private android.os.Handler mhandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
         @Override
