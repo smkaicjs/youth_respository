@@ -10,6 +10,8 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
@@ -27,16 +29,23 @@ public class CircleImageView extends androidx.appcompat.widget.AppCompatImageVie
         super(context, attrs);
         init();
 
+
     }
 
     public CircleImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
+
     }
+
     private void init(){
         mPaint = new Paint();
         mPaint.setDither(true);
         mPaint.setAntiAlias(true);
+
+        paintB = new Paint();
+        paintB.setDither(true);
+        paintB.setAntiAlias(true);
 
         mPorterDuffXfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
     }
@@ -50,19 +59,28 @@ public class CircleImageView extends androidx.appcompat.widget.AppCompatImageVie
         setMeasuredDimension(mSize,mSize);    //设置CircleImageView为等宽高
     }
 
+    public static final String TAG = "zhidingyiyuan";
     @Override
     protected void onDraw(Canvas canvas) {
+
         //获取sourceBitmap，即通过xml或者java设置进来的图片
         Drawable drawable = getDrawable();
-        if (drawable == null) return;
 
+        if (drawable == null) {
+
+            super.onDraw(canvas);
+            return;
+
+        }
         Bitmap sourceBitmap = ((BitmapDrawable)getDrawable()).getBitmap();
         if (sourceBitmap != null){
             //对图片进行缩放，以适应控件的大小
             Bitmap bitmap = resizeBitmap(sourceBitmap,getWidth(),getHeight());
             drawCircleBitmapByXfermode(canvas,bitmap);    //(1)利用PorterDuffXfermode实现
-            //drawCircleBitmapByShader(canvas,bitmap);    //(2)利用BitmapShader实现
+
+            return;
         }
+        super.onDraw(canvas);
     }
 
     private Bitmap resizeBitmap(Bitmap sourceBitmap,int dstWidth,int dstHeight){
@@ -80,15 +98,19 @@ public class CircleImageView extends androidx.appcompat.widget.AppCompatImageVie
         return Bitmap.createBitmap(sourceBitmap,0,0,width,height,matrix,true);
     }
 
-    private void drawCircleBitmapByXfermode(Canvas canvas,Bitmap bitmap){
-        final int sc = canvas.saveLayer(0,0,getWidth(),getHeight(),null,Canvas.ALL_SAVE_FLAG);
+    private Canvas drawCircleBitmapByXfermode(Canvas canvas,Bitmap bitmap){
+        int sc = canvas.saveLayer(0,0,getWidth(),getHeight(),paintB);
+//        int sc = canvas.save();
         //绘制dst层
-        canvas.drawCircle(mSize/2,mSize/2,mSize/2,mPaint);
+        canvas.drawCircle(mSize/2,mSize/2,mSize/2,paintB);
         //设置图层混合模式为SRC_IN
         mPaint.setXfermode(mPorterDuffXfermode);
         //绘制src层
         canvas.drawBitmap(bitmap,0,0,mPaint);
         canvas.restoreToCount(sc);
+
+        return canvas;
     }
+
 
 }

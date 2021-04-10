@@ -7,29 +7,27 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
-import com.shimk.Txgc.utils.Constant;
 import com.shimk.Txgc.utils.ShimkLog;
 
-public class AnimCustonImage extends androidx.appcompat.widget.AppCompatImageView {
+public class AnimLoadingCustonImage extends androidx.appcompat.widget.AppCompatImageView {
     private ObjectAnimator animator;
     private Context mContext;
-    public AnimCustonImage(Context context) {
+    public AnimLoadingCustonImage(Context context) {
         super(context);
 
         init();
     }
 
-    public AnimCustonImage(Context context, @Nullable AttributeSet attrs) {
+    public AnimLoadingCustonImage(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         init();
     }
 
-    public AnimCustonImage(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public AnimLoadingCustonImage(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
 
@@ -64,7 +62,7 @@ public class AnimCustonImage extends androidx.appcompat.widget.AppCompatImageVie
     private void init() {
 
         if (animator==null){
-            animator = ObjectAnimator.ofFloat(AnimCustonImage.this,"rotation",0f,360f);
+            animator = ObjectAnimator.ofFloat(AnimLoadingCustonImage.this,"rotation",0f,360f);
             animator.setDuration(1000);
             animator.setRepeatCount(ValueAnimator.INFINITE);
             animator.setRepeatMode(ValueAnimator.RESTART);

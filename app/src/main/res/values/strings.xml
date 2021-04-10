@@ -10,5 +10,9 @@
     <string name="menu_str_share">分享</string>
     <string name="toolbar_subtitle">副标题</string>
     <string name="main_page_str">每日寄语</string>
+    <string name="text_id_length">学号长度为12位</string>
+    <string name="text_password_length">密码长度限制为6~10位</string>
+    <string name="student_id">学号</string>
+    <string name="welcome_my_classmate">Welcome My Classmate!</string>
 
 </resources>

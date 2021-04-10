@@ -4,36 +4,39 @@
     package="com.shimk.Txgc">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.shimk.Txgc"/>
+        android:targetPackage="com.shimk.Txgc" />
+
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:icon="@drawable/app"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="false"
-        android:theme="@style/mystyle">
+        android:theme="@style/mystyle"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity.UserEditPersonInfoActivity" android:launchMode="singleTask"></activity>
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="LfWjMAqo9DnS6Iy7G6ovXBB7SOrYkyZf"
-            />
+            android:value="LfWjMAqo9DnS6Iy7G6ovXBB7SOrYkyZf" />
+
         <service
             android:name=".services.MediaService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
-        <activity android:name=".activity.contentActivity_note" />
-        <activity android:name=".MainActivity"
-            >
+        <activity android:name=".activity.ContentActivity" android:launchMode="singleTask"/>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,7 +44,7 @@
             </intent-filter>
         </activity>
 
-        <uses-library android:name="android.test.runner"/>
+        <uses-library android:name="android.test.runner" />
     </application>
 
 </manifest>

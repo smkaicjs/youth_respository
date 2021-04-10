@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="4dp"
+    android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+
+        android:id="@+id/edit_textlayout"
+        android:layout_height="wrap_content"
+        app:hintTextColor="#E18E5F19"
+        app:errorTextColor="#14268F"
+        app:boxBackgroundColor="#888BC34A"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textSize="17sp"
+            android:paddingStart="8dp"
+            android:background="@drawable/icon_edit_background"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:id="@+id/edit_text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

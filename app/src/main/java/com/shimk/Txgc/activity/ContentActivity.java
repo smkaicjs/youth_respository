@@ -26,7 +26,7 @@ import com.shimk.Txgc.presenter.PresenterInterface;
 
 import com.shimk.Txgc.utils.ShimkLog;
 
-public class contentActivity_note extends BaseActivity {
+public class ContentActivity extends BaseActivity {
 
 
 

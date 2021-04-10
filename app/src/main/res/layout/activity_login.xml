@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00616E6F"
+
+    android:background="#8B25211F"
     android:gravity="center_horizontal"
     tools:context=".MainActivity"
     android:orientation="vertical">
@@ -21,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome My Classmate!"
+                android:text="@string/welcome_my_classmate"
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:elevation="2dp"
@@ -44,34 +45,34 @@
                 android:id="@+id/textinput_name">
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:id="@+id/username"
+                android:paddingStart="10dp"
                 android:textSize="14sp"
-                android:elevation="4dp"
-                android:outlineProvider="bounds"
+                android:background="@drawable/icon_edit_background"
                 android:layout_gravity="center"
                 android:layout_marginTop="100dp"
                 android:inputType="number"
-                android:hint="学号"/>
+                android:hint="@string/student_id"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-
-
-
                 app:hintTextColor="#97CDDC39"
                 app:errorTextColor="#BF28AF2E"
                 android:id="@+id/textinput_passworld">
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:id="@+id/userpassword"
-                android:elevation="4dp"
+                android:elevation="10dp"
+                android:paddingStart="10dp"
+                android:outlineProvider="background"
+
+                android:background="@drawable/icon_edit_background"
                 android:inputType="textPassword"
-                android:outlineProvider="bounds"
                 android:hint="password"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,7 +117,7 @@
             </RelativeLayout>
 
         </LinearLayout>
-        <com.shimk.Txgc.customUI.AnimCustonImage
+        <com.shimk.Txgc.customUI.AnimLoadingCustonImage
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:id="@+id/login_loading"

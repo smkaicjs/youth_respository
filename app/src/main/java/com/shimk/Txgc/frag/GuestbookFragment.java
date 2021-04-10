@@ -2,6 +2,9 @@ package com.shimk.Txgc.frag;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -21,15 +23,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.shimk.Txgc.R;
-import com.shimk.Txgc.activity.contentActivity_note;
+import com.shimk.Txgc.activity.ContentActivity;
+import com.shimk.Txgc.activity.UserEditPersonInfoActivity;
 import com.shimk.Txgc.adapter.Recyclerview_adapter_liuyance;
 import com.shimk.Txgc.bean.ClassmateContent;
 import com.shimk.Txgc.customUI.CircleImageView;
@@ -39,6 +40,12 @@ import com.shimk.Txgc.utils.ShimkLog;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.shimk.Txgc.MainActivity.TAG;
 
@@ -60,7 +67,7 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
     private FloatingActionButton floatingActionButton;
 
     private TextView textView;
-    private contentActivity_note mActivity;
+    private ContentActivity mActivity;
     private View headView;
 
     private PresenterInterface.presenter presenter;
@@ -98,7 +105,7 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
 
     private void findview(View view){
 
-        mActivity = (contentActivity_note) getActivity();
+        mActivity = (ContentActivity) getActivity();
         headView = LayoutInflater.from((Context) mActivity).inflate(R.layout.nav_header,null);
         textView = view.findViewById(R.id.textsss);
 
@@ -106,14 +113,17 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
         toolbar.setNavigationIcon(R.drawable.ic_nav_button);
         navigationView = view.findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
-        navigationView.addHeaderView(headView);
+
 
 
         drawerLayout = view.findViewById(R.id.draw_layout);
         mRecyclerView = view.findViewById(R.id.liuyance_recyclerview);
         userHeaderPhoto = headView.findViewById(R.id.user_photo_header);
+
+        userHeaderPhoto.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.userheaderphoto));
         userHeaderText = headView.findViewById(R.id.current_username_nav_text);
 
+        navigationView.addHeaderView(headView);
         floatingActionButton = view.findViewById(R.id.refesh_button);
 
 
@@ -149,6 +159,9 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
                 case R.id.user_photo_header:
                     //todo
                     ShimkLog.showToast("头部点击",mActivity);
+                    Intent intent = new Intent(mActivity, UserEditPersonInfoActivity.class);
+                    startActivity(intent);
+
                     break;
                 case R.id.current_username_nav_text:
                     ShimkLog.showToast("头部点击",mActivity);
@@ -190,6 +203,18 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
 
 
 
+    private void dothing(){
+        Observable<String> observable= (Observable<String>) Observable.create((ObservableOnSubscribe<String>) emitter -> {
+
+        }).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+                new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+
+                    }
+                }
+        );
+    }
 
 
     @SuppressLint("WrongConstant")

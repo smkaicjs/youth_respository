@@ -2,7 +2,6 @@ package com.shimk.Txgc.frag;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.baidu.mapapi.map.MapView;
 import com.shimk.Txgc.R;
-import com.shimk.Txgc.activity.contentActivity_note;
+import com.shimk.Txgc.activity.ContentActivity;
 
 
 import io.reactivex.Observable;
@@ -29,7 +28,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.GET;
 
-import static com.shimk.Txgc.utils.ShimkLog.TAG;
 import static com.shimk.Txgc.utils.ShimkLog.logd;
 
 /**
@@ -42,7 +40,7 @@ public class MapFragment extends Fragment {
     private TextView textView;
 
     private MapView baiduMap;
-    private contentActivity_note mActivity;
+    private ContentActivity mActivity;
 
 
     public MapFragment() {
@@ -60,10 +58,11 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_rxjava, container, false);
+        View view = inflater.inflate(R.layout.fragment_baidumap, container, false);
         textView = view.findViewById(R.id.rejava_text);
         baiduMap = view.findViewById(R.id.baidu_mao_view);
 
+        
         textView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -72,7 +71,7 @@ public class MapFragment extends Fragment {
                 textRxjava.testModel();
             }
         });
-        mActivity = (contentActivity_note) getActivity();
+        mActivity = (ContentActivity) getActivity();
         return view;
     }
 

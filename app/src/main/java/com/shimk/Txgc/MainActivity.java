@@ -19,15 +19,17 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
-import com.shimk.Txgc.activity.contentActivity_note;
+import com.shimk.Txgc.activity.ContentActivity;
 import com.shimk.Txgc.base.BaseActivity;
 
 import com.shimk.Txgc.bean.BackCodeJavaBean;
-import com.shimk.Txgc.customUI.AnimCustonImage;
+import com.shimk.Txgc.bean.CurrentUser;
+import com.shimk.Txgc.customUI.AnimLoadingCustonImage;
 import com.shimk.Txgc.networkModel.ApiStore;
 import com.shimk.Txgc.utils.Constant;
 import com.shimk.Txgc.utils.Shareprefener;
 import com.shimk.Txgc.utils.ShimkLog;
+import com.shimk.Txgc.utils.TextUtils;
 
 import java.util.HashMap;
 
@@ -44,7 +46,7 @@ public class MainActivity extends BaseActivity {
     private EditText username,userpassword;
     private CoordinatorLayout coordinatorLayout;
     private TextInputLayout inputEditTextname,inputEditTextpassword;
-    private AnimCustonImage mLoadingIcon;
+    private AnimLoadingCustonImage mLoadingIcon;
     private TextView registerText;
     private Button loginButton;
     private boolean loginState = false;
@@ -56,11 +58,29 @@ public class MainActivity extends BaseActivity {
     public static final String TAG = "ShiMingKun";
     @Override
     protected void init() {
-        setContentView(R.layout.activity_main);
-        skipLogin();
-        findview();
+        setContentView(R.layout.activity_login);
 
-        //test
+        //服务器崩溃临时采用跳过登录
+        Intent intent = new Intent(MainActivity.this, ContentActivity.class);
+        intent.putExtra("login",sharefilename);
+        startActivity(intent);
+        Shareprefener.dealshareprefenerce(MainActivity.this,
+                true,
+                sharefilename,
+                Constant.AlEADLY_USRE_NAME,
+                "160610401017",
+                "");
+        Shareprefener.dealshareprefenerce(MainActivity.this,
+                true,sharefilename,Constant.AlEADLY_USRE_PASSWORD,
+                TextUtils.decodeMD5("smk199713"),
+                "");
+        CurrentUser.createCurrentUser("160610401017",TextUtils.decodeMD5("smk199713"));
+
+
+//        skipLogin();
+//        findview();
+
+
 
 
 
@@ -357,7 +377,7 @@ public class MainActivity extends BaseActivity {
                         dealLogin(name, password);
 
 //                        if (loginres) {
-//                            Intent intent = new Intent(MainActivity.this, contentActivity_note.class);
+//                            Intent intent = new Intent(MainActivity.this, ContentActivity.class);
 //                            intent.putExtra("login", sharefilename);
 //                            startActivity(intent);
 //                            Shareprefener.dealshareprefenerce(MainActivity.this, true, sharefilename, logincerity, true, false);
@@ -367,6 +387,7 @@ public class MainActivity extends BaseActivity {
                     } catch (NumberFormatException e) {
                         showSnackBar("账户或密码错误 ", coordinatorLayout);
                         mLoadingIcon.stopAnim();
+                        mLoadingIcon.setVisibility(View.GONE);
                         e.printStackTrace();
                     }
                     break;
@@ -488,12 +509,33 @@ public class MainActivity extends BaseActivity {
                 false,sharefilename,logintime,0, (long) 0f);
         long currentTimes = System.currentTimeMillis();
         if (currentTimes-lastLoginTime>1000*60*60*24*3){
-            ///////////登录间隔大于三天将重新登录
+            ///////////登录间隔大于三天将重新登录//已存储登录状态清空
+            Shareprefener.dealshareprefenerce(MainActivity.this,
+                    true,
+                    sharefilename,
+                    Constant.AlEADLY_USRE_NAME,
+                    "",
+                    "");
+            Shareprefener.dealshareprefenerce(MainActivity.this,
+                    true,sharefilename,Constant.AlEADLY_USRE_PASSWORD,
+                    "",
+                    "");
             return;
         }
-        Intent intent = new Intent(MainActivity.this, contentActivity_note.class);
+        Intent intent = new Intent(MainActivity.this, ContentActivity.class);
         intent.putExtra("login",sharefilename);
         startActivity(intent);
+
+        CurrentUser.createCurrentUser(
+                Shareprefener.dealshareprefenerce(MainActivity.this,
+                        false,
+                        sharefilename,
+                        Constant.AlEADLY_USRE_NAME,
+                        "",""),
+                Shareprefener.dealshareprefenerce(MainActivity.this,false,sharefilename,
+                        Constant.AlEADLY_USRE_PASSWORD,"","")
+        );
+
         Shareprefener.dealshareprefenerce(MainActivity.this,true,sharefilename,logincerity,true,false);
         long currentTime = System.currentTimeMillis();
         Shareprefener.dealshareprefenerce(MainActivity.this,true,sharefilename,logintime,currentTime,0);
@@ -521,14 +563,23 @@ public class MainActivity extends BaseActivity {
                     public void onResponse(Call<BackCodeJavaBean> call, Response<BackCodeJavaBean> response) {
                         if (response.body().getCode()==200){
                             mLoadingIcon.stopAnim();
-                            Intent intent = new Intent(MainActivity.this, contentActivity_note.class);
+                            mLoadingIcon.setVisibility(View.GONE);
+
+                            Intent intent = new Intent(MainActivity.this, ContentActivity.class);
                             intent.putExtra("login", sharefilename);
                             startActivity(intent);
+                            String md5strpass = TextUtils.decodeMD5(password);
+                            Shareprefener.dealshareprefenerce(MainActivity.this,true,sharefilename,Constant.AlEADLY_USRE_NAME,strname,"");
+                            Shareprefener.dealshareprefenerce(MainActivity.this,true,sharefilename,Constant.AlEADLY_USRE_PASSWORD,md5strpass,"");
+
+                            CurrentUser.createCurrentUser(strname,password);
                             Shareprefener.dealshareprefenerce(MainActivity.this, true, sharefilename, logincerity, true, false);
                             long currentTime = System.currentTimeMillis();
                             Shareprefener.dealshareprefenerce(MainActivity.this, true, sharefilename, logintime, currentTime, 0);
                         }else {
                             showToast("登录错误："+response.body().getMessage()+"  Code:"+response.body().getCode());
+                            mLoadingIcon.stopAnim();
+                            mLoadingIcon.setVisibility(View.GONE);
                         }
                     }
 
@@ -536,6 +587,8 @@ public class MainActivity extends BaseActivity {
                     public void onFailure(Call<BackCodeJavaBean> call, Throwable t) {
 
                         mLoadingIcon.stopAnim();
+                        mLoadingIcon.setVisibility(View.GONE);
+
                         showToast("登录失败"+t);
                         ShimkLog.logd(String.valueOf(t));
                     }
@@ -544,16 +597,13 @@ public class MainActivity extends BaseActivity {
                 Shareprefener.dealshareprefenerce(this,true
                 ,sharefilename
                 ,"LOGIN_STATE",true,false);
-
-
                 return true;
-
-
             }
         }
         ShimkLog.logd("密码或学号错误，登录失败");
         showSnackBar("密码或学号错误，登录失败111",coordinatorLayout);
         mLoadingIcon.stopAnim();
+        mLoadingIcon.setVisibility(View.GONE);
         return false;
     }
     @Override
@@ -562,7 +612,7 @@ public class MainActivity extends BaseActivity {
 
      }
 
-    private void showToast(String str){
+     private void showToast(String str){
         Toast.makeText(this,str,Toast.LENGTH_SHORT).show();
     }
 }
