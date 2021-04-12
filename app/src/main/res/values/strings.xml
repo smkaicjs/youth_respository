@@ -14,5 +14,10 @@
     <string name="text_password_length">密码长度限制为6~10位</string>
     <string name="student_id">学号</string>
     <string name="welcome_my_classmate">Welcome My Classmate!</string>
+    <string name="confirm_modify">确认修改</string>
+    <string name="obtian_currentuser_failed">获取当前用户失败</string>
+    <string name="today">今天</string>
+    <string name="str_1">距离我们毕业时\n已经过去了：</string>
+    <string name="str_2">今天你还好吗？\n老同学\n加油</string>
 
 </resources>

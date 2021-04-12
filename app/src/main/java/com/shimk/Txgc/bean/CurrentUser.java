@@ -8,6 +8,17 @@ public class CurrentUser {
         this.Id = StudentId;
         this.password = Password;
     }
+
+
+
+    public String getId() {
+        return Id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public static CurrentUser getCurrentUser(){
         if (user==null){
             return null;

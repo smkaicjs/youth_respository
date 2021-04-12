@@ -82,6 +82,19 @@ public class EditInputCustomEditText extends LinearLayout {
 
     }
 
+    public String getText(){
+        try {
+            return String.valueOf(editText.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public void setText(String string){
+        editText.setText(string);
+    }
+
 
 
 }

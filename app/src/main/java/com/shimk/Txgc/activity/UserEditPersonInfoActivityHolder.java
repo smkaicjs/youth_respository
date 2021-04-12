@@ -2,24 +2,37 @@ package com.shimk.Txgc.activity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Button;
 
 import com.shimk.Txgc.R;
 import com.shimk.Txgc.customUI.EditInputCustomEditText;
+import com.shimk.Txgc.customUI.GraduateTimeCustomTextView;
 
 public class UserEditPersonInfoActivityHolder {
     private UserEditPersonInfoActivity mActivity;
     protected EditInputCustomEditText mNameEdit,mOldPasswordEdit,mNewPasswordEdit;
+    protected Button mComfirmModifyButton;
+
+    protected GraduateTimeCustomTextView timeCustomTextView;
 
     public UserEditPersonInfoActivityHolder(UserEditPersonInfoActivity mActivity) {
         this.mActivity = mActivity;
         findViews();
         registTextChangeListener();
+        registOnTouchListener();
 
     }
+
+    private void registOnTouchListener() {
+        mComfirmModifyButton.setOnTouchListener(mActivity);
+    }
+
     private void findViews(){
         mNameEdit = mActivity.findViewById(R.id.User_change_name);
         mOldPasswordEdit = mActivity.findViewById(R.id.User_change_password_old);
         mNewPasswordEdit = mActivity.findViewById(R.id.User_change_password_new);
+        mComfirmModifyButton = mActivity.findViewById(R.id.comfirm_button);
+        timeCustomTextView = mActivity.findViewById(R.id.custom_textview_distance_time);
         mNameEdit.setHint("学号");
         mOldPasswordEdit.setHint("旧密码");
         mNewPasswordEdit.setHint("新密码");

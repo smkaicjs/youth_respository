@@ -9,6 +9,8 @@ public class Constant {
     public static final int JSON_FORMAT = 0;
     public static final String AlEADLY_USRE_NAME = "aleardyusrname";
     public static final String AlEADLY_USRE_PASSWORD = "aleardyusrpass";
+    public static final long graduateTime = 1593532800000L;
+
 
 
 
