@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".frag.MapFragment"
-    android:orientation="vertical">
+    >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_weight="1"
+        android:visibility="gone"
         android:id="@+id/rejava_text" />
     <com.baidu.mapapi.map.MapView
         android:id="@+id/baidu_mao_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:clickable="true"/>
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/change_map_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity=""
+        android:rotation="48"
+        android:layout_marginStart="200dp"
+        android:rotationX="47"
+        android:rotationY="-43"
+        android:scaleType="center"
+        android:src="@drawable/icon_edit_background"
+        app:backgroundTint="@color/design_default_color_error"
+        app:borderWidth="3dp"
+        app:elevation="3dp"
+        app:maxImageSize="40dp"
+        tools:visibility="visible" />
+
+
+</RelativeLayout>
