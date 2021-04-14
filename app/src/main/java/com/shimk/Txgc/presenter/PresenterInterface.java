@@ -6,6 +6,7 @@ import com.shimk.Txgc.bean.ClassmateJavabean;
 public interface PresenterInterface {
     interface presenter{
         void getContent(ClassmateJavabean user,String contentUrl);
+        void getEverydayData();
     }
     interface View extends BaseViewInterface<presenter>{
 
@@ -14,6 +15,7 @@ public interface PresenterInterface {
 
         void responseFromNetPresenterSucc(ClassmateContent content);
         void responseFromNetPresenterFailed(String failedStr);
+        void responseFromNetEveryDayPreserterFailed(String string,String source);
 
 
     }

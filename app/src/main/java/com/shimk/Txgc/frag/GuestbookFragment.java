@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -15,14 +16,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,7 +58,7 @@ import static com.shimk.Txgc.MainActivity.TAG;
  * Use the
  * create an instance of this fragment.
  */
-public class GuestbookFragment extends Fragment implements PresenterInterface.View{
+public class GuestbookFragment extends Fragment implements PresenterInterface.View,View.OnTouchListener{
 
     private Toolbar toolbar;
     private NavigationView navigationView;
@@ -71,6 +75,8 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
     private View headView;
 
     private PresenterInterface.presenter presenter;
+
+    private AlertDialog mEverydayDialog;
 
 
     @Override
@@ -133,6 +139,7 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
     private void viewinit(){
 
 
+        textView.setOnTouchListener(this::onTouch);
         navigationView.setNavigationItemSelectedListener(onNavigationItemSelectedListener);
         //加载本地所有记录
         recycleradapterDataList = Litepaldealwith.getAllClassmatecontent();
@@ -276,11 +283,68 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
         ShimkLog.logd("请求错误");
     }
 
+    @Override
+    public void responseFromNetEveryDayPreserterFailed(String string,String source) {
+        //todo 弹出每日一句弹窗
+
+        ShimkLog.logd("获取到的字符串为："+string);
+        showEveryDayDialog(string,source);
+    }
+
+    private TextView everydayTextView,everydayTextviewSource;
+
+    @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
+    private void showEveryDayDialog(String string,String source) {
+
+        if (mEverydayDialog==null||!mEverydayDialog.isShowing()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+            View view = LayoutInflater.from(mActivity).inflate(R.layout.everyday_alertdialog_layout,null);
+            everydayTextView = view.findViewById(R.id.everyday_text);
+            everydayTextviewSource = view.findViewById(R.id.everyday_text_source);
+            everydayTextView.setText(string);
+            everydayTextviewSource.setText("来自："+source);
+            Button button = view.findViewById(R.id.everyday_readed);
+            button.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (mEverydayDialog.isShowing()){
+                        mEverydayDialog.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            DisplayMetrics dm = new DisplayMetrics();
+            mActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+            layoutParams.height = (int) (dm.heightPixels*0.5);
+            layoutParams.width = (int) (dm.widthPixels*0.3);
+            view.setLayoutParams(layoutParams);
+
+            builder.setView(view);
+            mEverydayDialog = builder.create();
+            mEverydayDialog.show();
+        }else
+            {
+            everydayTextView.setText(string);
+        }
+    }
 
 
     @Override
     public void setPresenter(PresenterInterface.presenter presenter) {
 
         this.presenter = presenter;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (v.getId()){
+            case R.id.textsss:
+                presenter.getEverydayData();
+                ShimkLog.logd("dianji");
+                break;
+        }
+        return false;
     }
 }

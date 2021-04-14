@@ -4,4 +4,5 @@ import io.reactivex.Observable;
 
 interface NetworkLiuyanceContent {
     ApiStore getNetWorkData(String baseurl,int isjson);
+
 }

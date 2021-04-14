@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.baidu.mapapi.map.MapView;
 import com.shimk.Txgc.R;
 import com.shimk.Txgc.activity.ContentActivity;
+import com.shimk.Txgc.utils.LogOkhttp;
 
 
 import io.reactivex.Observable;
@@ -23,6 +24,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -101,9 +103,11 @@ public class MapFragment extends Fragment {
 
     class textRxjava{
         public void testModel(){
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new LogOkhttp()).build();
             Retrofit.Builder retrofit = new Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(ScalarsConverterFactory.create())
+                    .client(client)
                     .baseUrl("http://www.baidu.com");
             Retrofit retrofit1 = retrofit.build();
             Apiservices api = retrofit1.create(Apiservices.class);
