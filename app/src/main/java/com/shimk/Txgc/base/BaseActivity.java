@@ -21,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public static final String TAG = "BaseActivity";
     private MediaService.MediaBinder backMusicBinder;
+    public int currentbackmusic = 1;
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -75,5 +76,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void closeBackMusic(){
         backMusicBinder.startPlayBackMusic();
+    }
+
+    public void changeMusic(String name){
+        backMusicBinder.changeBackgroundMusic(name);
     }
 }

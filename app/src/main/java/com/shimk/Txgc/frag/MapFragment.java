@@ -225,7 +225,7 @@ public class MapFragment extends Fragment {
 
             //自定义配置位置图标
             ShimkLog.logd(baiduMapView.getChildCount()+"个子视图");
-            map.setMyLocationConfiguration(new MyLocationConfiguration(MyLocationConfiguration.LocationMode.COMPASS,true
+            map.setMyLocationConfiguration(new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING,true
                     ,BitmapDescriptorFactory.fromResource(R.drawable.icon_index),
                     0xfEEfffff,
                     0x9fffffff));

@@ -2,6 +2,7 @@ package com.shimk.Txgc.frag;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
@@ -78,6 +79,11 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
 
     private AlertDialog mEverydayDialog;
 
+    private boolean isLoadingeveryDay = false;
+
+    private String[] back_music_array = new String[]{"music1.flac","music2.mp3","music3.mp3"};
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -151,7 +157,19 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
         userHeaderPhoto.setOnClickListener(headItemClickListener);
         floatingActionButton.setOnClickListener(v -> {
             //刷新内容 暂时为关闭音乐
-            mActivity.closeBackMusic();
+//            mActivity.closeBackMusic();
+            if (mActivity.currentbackmusic==1){
+                mActivity.changeMusic(back_music_array[1]);
+                mActivity.currentbackmusic=2;
+
+            }else if (mActivity.currentbackmusic==2){
+                mActivity.changeMusic(back_music_array[2]);
+                mActivity.currentbackmusic=3;
+
+            }else{
+                mActivity.changeMusic(back_music_array[0]);
+                mActivity.currentbackmusic=1;
+            }
 
         });
 
@@ -165,7 +183,7 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
             switch (v.getId()){
                 case R.id.user_photo_header:
                     //todo
-                    ShimkLog.showToast("头部点击",mActivity);
+                    ShimkLog.showToast("头像",mActivity);
                     Intent intent = new Intent(mActivity, UserEditPersonInfoActivity.class);
                     startActivity(intent);
 
@@ -322,8 +340,15 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
             view.setLayoutParams(layoutParams);
 
             builder.setView(view);
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    isLoadingeveryDay = false;
+                }
+            });
             mEverydayDialog = builder.create();
             mEverydayDialog.show();
+            isLoadingeveryDay = true;
         }else
             {
             everydayTextView.setText(string);
@@ -341,8 +366,13 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
     public boolean onTouch(View v, MotionEvent event) {
         switch (v.getId()){
             case R.id.textsss:
-                presenter.getEverydayData();
-                ShimkLog.logd("dianji");
+                if (!isLoadingeveryDay){
+                    presenter.getEverydayData();
+                    ShimkLog.logd("start loading everydaydata");
+                }else {
+                    ShimkLog.showToast("加载中...",mActivity);
+                }
+
                 break;
         }
         return false;

@@ -47,12 +47,27 @@ public class MediaService extends Service {
                 initMediaPlayer();
             }
         }
+
+        public void changeBackgroundMusic(String name){
+            if (mMediaPlayer!=null) {
+                mMediaPlayer.reset();
+                try {
+                    mMediaPlayer.setDataSource(getAssets().openFd(name));
+                    mMediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    ShimkLog.logd("open music error");
+                }
+
+            }
+        }
     }
 
     private void initMediaPlayer(){
         mMediaPlayer = new MediaPlayer();
         mMediaPlayer.reset();
         AssetManager assetManager = getAssets();
+
         try {
             AssetFileDescriptor assetFileDescriptor = assetManager.openFd("music1.flac");
             mMediaPlayer.setDataSource(assetFileDescriptor);
