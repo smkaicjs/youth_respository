@@ -38,6 +38,7 @@ import com.shimk.Txgc.activity.ContentActivity;
 import com.shimk.Txgc.activity.UserEditPersonInfoActivity;
 import com.shimk.Txgc.adapter.Recyclerview_adapter_liuyance;
 import com.shimk.Txgc.bean.ClassmateContent;
+import com.shimk.Txgc.bean.CurrentUser;
 import com.shimk.Txgc.customUI.CircleImageView;
 import com.shimk.Txgc.presenter.PresenterInterface;
 import com.shimk.Txgc.utils.Litepaldealwith;
@@ -97,7 +98,6 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_guestbook, container, false);
-
         findview(view);
         viewinit();
         setHasOptionsMenu(true);
@@ -153,6 +153,7 @@ public class GuestbookFragment extends Fragment implements PresenterInterface.Vi
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),1));
         mRecyclerView.setAdapter(recyclerAdapter);
         recyclerAdapter.setOnItemClick(onRecyclerItemClick);
+        userHeaderText.setText(CurrentUser.getCurrentUser().getId());
         userHeaderText.setOnClickListener(headItemClickListener);
         userHeaderPhoto.setOnClickListener(headItemClickListener);
         floatingActionButton.setOnClickListener(v -> {

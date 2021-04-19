@@ -20,5 +20,9 @@
     <string name="str_1">距离我们毕业时\n已经过去了：</string>
     <string name="str_2">今天你还好吗？\n老同学\n加油</string>
     <string name="str_3">已阅</string>
+    <string name="modify_header_photo">更换头像</string>
+    <string name="local_photo">本地相册</string>
+    <string name="photograph">拍照</string>
+    <string name="cancel">取消</string>
 
 </resources>

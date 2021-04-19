@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
                 true,sharefilename,Constant.AlEADLY_USRE_PASSWORD,
                 TextUtils.decodeMD5("smk199713"),
                 "");
-        CurrentUser.createCurrentUser("160610401017",TextUtils.decodeMD5("smk199713"));
+        CurrentUser.createCurrentUser("160610401017",TextUtils.decodeMD5("smk199713"),null);
 
 
 //        skipLogin();
@@ -456,26 +456,6 @@ public class MainActivity extends BaseActivity {
                         }
                         showToast("学号错误，无此学号");
 
-//                        Call<String> call = api.registerpost(RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"),strJson));
-//                        call.enqueue(new Callback<String>() {
-//                            @Override
-//                            public void onResponse(Call<String> call, Response<String> response) {
-//                                ShimkLog.logd("市民卡"+response.body().toString());
-//                                mRegisterAlertDialog.dismiss();
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<String> call, Throwable t) {
-//
-//                                ShimkLog.logd("请求post失败");
-//                                ShimkLog.logd(call.toString());
-//
-//                            }
-//                        });
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
 
                         break;
                     } catch (Exception e) {
@@ -533,7 +513,7 @@ public class MainActivity extends BaseActivity {
                         Constant.AlEADLY_USRE_NAME,
                         "",""),
                 Shareprefener.dealshareprefenerce(MainActivity.this,false,sharefilename,
-                        Constant.AlEADLY_USRE_PASSWORD,"","")
+                        Constant.AlEADLY_USRE_PASSWORD,"",""),null
         );
 
         Shareprefener.dealshareprefenerce(MainActivity.this,true,sharefilename,logincerity,true,false);
@@ -572,7 +552,7 @@ public class MainActivity extends BaseActivity {
                             Shareprefener.dealshareprefenerce(MainActivity.this,true,sharefilename,Constant.AlEADLY_USRE_NAME,strname,"");
                             Shareprefener.dealshareprefenerce(MainActivity.this,true,sharefilename,Constant.AlEADLY_USRE_PASSWORD,md5strpass,"");
 
-                            CurrentUser.createCurrentUser(strname,password);
+                            CurrentUser.createCurrentUser(strname,password,null);
                             Shareprefener.dealshareprefenerce(MainActivity.this, true, sharefilename, logincerity, true, false);
                             long currentTime = System.currentTimeMillis();
                             Shareprefener.dealshareprefenerce(MainActivity.this, true, sharefilename, logintime, currentTime, 0);

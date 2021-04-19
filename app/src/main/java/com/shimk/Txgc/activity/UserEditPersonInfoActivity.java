@@ -1,16 +1,22 @@
 package com.shimk.Txgc.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
 
 import com.shimk.Txgc.R;
 import com.shimk.Txgc.base.BaseActivity;
@@ -19,6 +25,8 @@ import com.shimk.Txgc.customUI.EditInputCustomEditText;
 import com.shimk.Txgc.utils.Constant;
 import com.shimk.Txgc.utils.ShimkLog;
 import com.shimk.Txgc.utils.TextUtils;
+
+import java.util.zip.Inflater;
 
 /*
  * The Class for user change person info，And what does it show
@@ -31,6 +39,9 @@ public class UserEditPersonInfoActivity extends BaseActivity implements View.OnT
 
     private final int HANDLER_REFRESH_GRADUATE_TIME = 0x10;
     private UserEditPersonInfoActivityHolder mholder = null;
+    private AlertDialog choosePhotoSourceAlertdialog = null;
+
+    private TextView mPhotograph,mLocalPhoto,mCancelButton;
 
     @Override
     protected void init() {
@@ -58,8 +69,51 @@ public class UserEditPersonInfoActivity extends BaseActivity implements View.OnT
                 }
 
                 break;
+            case R.id.user_change_page_user_healder:
+
+                showChoosePhotoDialog();
+                break;
+            case R.id.local_button:
+                //todo
+                break;
+            case R.id.photograph_button:
+                //todo
+                break;
+            case R.id.cancel_button:
+                //todo
+                break;
         }
         return false;
+    }
+
+
+
+    private void showChoosePhotoDialog() {
+
+        TextView localbutton,cancelbutton,protographbutton;
+        if (choosePhotoSourceAlertdialog==null){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View view = LayoutInflater.from(this).inflate(R.layout.bottom_dialog_layout,null);
+            localbutton = view.findViewById(R.id.local_button);
+            cancelbutton = view.findViewById(R.id.cancel_button);
+            protographbutton = view.findViewById(R.id.photograph_button);
+            localbutton.setOnTouchListener(this);
+            cancelbutton.setOnTouchListener(this::onTouch);
+            protographbutton.setOnTouchListener(this);
+            builder.setView(view);
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    choosePhotoSourceAlertdialog = null;
+                }
+            });
+            choosePhotoSourceAlertdialog = builder.create();
+            Window window = choosePhotoSourceAlertdialog.getWindow();
+            window.setGravity(Gravity.BOTTOM);
+            window.setWindowAnimations(R.style.choosedialogstyle);
+            choosePhotoSourceAlertdialog.show();
+        }
     }
 
     /*

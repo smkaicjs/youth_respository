@@ -11,4 +11,9 @@
         <item name="android:textColor">#CE78AAAA</item>
     </style>
 
+    <style name="choosedialogstyle" parent="AppTheme">
+        <item name="android:windowEnterAnimation">@anim/bottom_anim_loading</item>
+        <item name="android:windowExitAnimation">@anim/bottom_anim_exit</item>
+    </style>
+
 </resources>
